@@ -1,0 +1,36 @@
+.movietipdescription {
+/*	color: Grey;*/
+	font-size: 70%;
+}
+
+.movielist a {
+	color: Grey;
+}
+
+.menu {
+	border-top: 1px solid #BBB;
+	background-color: white;
+	color: #BBB;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: right;
+}
+
+.menuitem {
+/*		border-top: 2px solid #BBB;*/
+	border-left: 1px solid #BBB;
+	border-bottom: 1px solid #BBB;
+	border-right: 1px solid #BBB;
+	padding: 0px 10px 0px 10px;
+	margin-top: 10px;
+	
+	text-decoration: none;
+	color: #BBB;
+	font-size: 200%;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	height: 40px;
+}
+
+.menuitem:hover {
+	color: black;
+}

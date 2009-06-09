@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html> 
+<head> 
+  <title>Superkoud - {% block title %}{% endblock %}</title> 
+  <link rel="stylesheet" type="text/css" href="/static/css/superkoud.css" /> 
+</head> 
+<body> 
+	<div class='menu'>
+		{% if user.username %} 
+	      <span class='menuitem'>logged in as {{ user.username }}!</span>
+	    {% else %} 
+			<a class='menuitem' href="/login/">login</a> 
+	    {% endif %}
+
+			<a class='menuitem' href='/tips/'>tips</a>
+
+			<a class='menuitem' href='/wishes/'>wishes</a>
+	</div>
+  	<div class='page_title'><h1>
+  		{% block page_title %}{% endblock %}</h1> 
+	</div>
+	<div class='content'>
+  		{% block content %}{% endblock %} 
+	</div>
+</body> 
