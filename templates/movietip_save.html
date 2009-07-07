@@ -1,10 +1,9 @@
-<html>
-<head>
-    <title>Tips</title>
-</head>
-<body>
-    <h1>Tip it</h1>
-
+{% extends "base.html" %}
+	{% block page_title %}
+    	Add a tip
+	{% endblock %}
+	
+	{% block content %}
     {% if form.errors %}
         <p style="color: red;">
             Please correct the error{{ form.errors|pluralize }} below.
@@ -17,5 +16,5 @@
         </table>
         <input type="submit" value="Submit">
     </form>
-</body>
-</html>
+
+	{% endblock %}

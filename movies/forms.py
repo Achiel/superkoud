@@ -20,12 +20,16 @@ class MovietipSaveForm(forms.Form):
 		required=False, 
 		widget=forms.TextInput(attrs={'size': 64}) 
 	)
+	tags = forms.CharField(
+		label='Tags', 
+		required=False, 
+		widget=forms.TextInput(attrs={'size': 64})
+	)
 	
 class MoviewishSaveForm(forms.Form):
 	movie = forms.CharField(
 		widget=forms.HiddenInput
 	)
-	
 	# class Meta:
 	# 	model = Movietip
 	# 	exclude = ('user',)

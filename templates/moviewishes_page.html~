@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+	{% block page_title %}
+    	My wishes
+	{% endblock %}
+	
+	{% block content %}
+		<div class='wishlist'>
+			{% if moviewishes %} 
+		      <ul> 
+		        {% for moviewish in moviewishes %} 
+		          	<li><a href="/wish/{{ moviewish.id }}"> 
+		            	{{ moviewish.movie.title }}</a>
+						{{ moviewish.description }}
+						<form action="/converttotip/{{ moviewish.id }}" method="post">
+						{{ moviewish.form.as_p }}
+							<input type="submit" value="love it!"/>
+					  	</form>
+						<form action="/wish/{{ moviewish.id }}" method="POST">
+							<input class='hatebuttons' onClick="flapsor()" type="button" value="hate it!"/>
+						</form>
+					</li> 
+		        {% endfor %} 
+		      </ul> 
+			</div>
+		    {% else %} 
+		      <p>You don't have any wishes at the moment :('</p> 
+		    {% endif %}
+		</div>
+	{% endblock %}
+

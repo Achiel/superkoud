@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+	{% block page_title %}
+		{{ movietip.movie.title }}
+	{% endblock %}
+	
+	{% block content %}
+		{% include 'render_tip.html' %}
+    
+	{% endblock %}

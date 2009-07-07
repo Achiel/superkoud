@@ -1,0 +1,17 @@
+<div class='movielist'>
+	{% if movietips %} 
+      <ul> 
+        {% for movietip in movietips %} 
+          	<li><a href="/tip/view/{{ movietip.id }}"> 
+            	{{ movietip.movie.title }}</a>
+				<div class="movietipdescription">
+					{{ movietip.description }}
+				</div>
+			</li> 
+        {% endfor %} 
+      </ul> 
+	</div>
+    {% else %} 
+      <p>No movietips found.</p> 
+    {% endif %}
+</div>

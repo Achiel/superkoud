@@ -1,0 +1,21 @@
+<div class='movietip'>
+	<span class='movietiptitle'>
+		{{ movietip.movie.title }}
+	</span>
+	<span class='movietipdescription'>
+
+		{{ movietip.description }}
+	</span>
+	<div class='movietiptags'>
+		{% for tag in tiptags %}
+			<a href='/tag/{{ tag.name }}'> {{ tag.name}} </a>
+		{% endfor %}
+	</div>
+	<div class='towish'>
+		<form action="/converttowish/" method="post">
+	      {{ wishform.as_p }}
+	      <input type="submit" value="Add to my wishlist">
+	  </form>	
+	</div>	
+</div>
+		

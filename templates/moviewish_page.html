@@ -1,12 +1,16 @@
-<html> 
-  <head> 
-    <title>Moviewish </title> 
-  </head> 
-  <body> 
-    <h1>Movietips for {{ username }}</h1>
-	<div>
-		{{ movie.title }}
+{% extends "base.html" %}
+	{% block page_title %}
+		{{ moviewish.movie.title }}
+	{% endblock %}
+	
+	{% block content %}
+    <div class='movietip'>
+			{{ movie.title }}
 	</div>
-		
-  </body> 
-</html> 
+	<div class='totip'>
+		<form action="/converttotip/" method="post">
+	      {{ tipform.as_p }}
+	      <input type="submit" value="seen it, like it!">
+	  </form>	
+	</div>	
+	{% endblock %}

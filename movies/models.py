@@ -3,8 +3,17 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import User
 
+class UserProfile(models.Model):
+	user = models.ForeignKey(User, unique=True)
+	friends = models.ManyToManyField("self")
+	joined = models.DateTimeField(auto_now_add=True)
+	def __str__(self):
+		return "User profile for %s" % user.username
+		
 class Movie(models.Model):
 	title = models.TextField(unique=True)
+	trailer = models.URLField()
+	imdb = models.URLField()
 	def __str__(self):
 		return self.title
 	

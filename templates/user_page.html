@@ -6,20 +6,12 @@
 	{% endblock %}
 	
 	{% block content %}
-	<div class='movielist'>
-    {% if movietips %} 
-      <ul> 
-        {% for movietip in movietips %} 
-          	<li><a href="/tip/view/{{ movietip.id }}"> 
-            	{{ movietip.movie.title }}</a>
-				<div class="movietipdescription">
-					{{ movietip.description }}
-				</div>
-			</li> 
-        {% endfor %} 
-      </ul> 
-	</div>
-    {% else %} 
-      <p>No bookmarks found.</p> 
-    {% endif %} 
+		{% include 'render_tips.html' %}
+
+	<form action="" method="post">
+        <table>
+            {{ addfriendform.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
 	{% endblock %}

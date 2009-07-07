@@ -1,0 +1,9 @@
+<div class='movie'>
+	{{ movie.title }}
+	{% if movie.imdb: %}
+		<a href='{{ movie.imdb }}'>imdb</a>
+	{% endif %}
+	{% if movie.trailer %}
+		<a href='{{ movie.trailer }}'>trailer</a>
+	{% endif %}
+</div>

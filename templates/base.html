@@ -3,24 +3,72 @@
 <html> 
 <head> 
   <title>Superkoud - {% block title %}{% endblock %}</title> 
+	<style type="text/css">
+
+	body {
+		background:#FFFFFF url('/static/img/bar.png') repeat-x fixed center bottom;
+	}
+
+
+	img.logo  { 
+		position:absolute; 
+		bottom:0;    
+		right:0; 
+	}
+
+
+	</style>
   <link rel="stylesheet" type="text/css" href="/static/css/superkoud.css" /> 
+	<script src="/static/js/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	function flapsor() { 
+		$.get('/tip/view/4', 
+		{itemId: $(this).val()}, 
+		function(data) { 
+			$('#content').empty().append(data); 
+		}
+	  ); 
+	} 
+	
+	$(document).ready(function(){ 
+	   $('.hatebuttons').click(submitForm); 
+	});
+	
+	function submitForm() {
+		alert(this.form.action);
+		params = {}
+		$.post(   
+		          this.form.action + "?format=json", 
+		          params, 
+		          function(data) { 
+		            $('#output').empty().append(data); 
+		          } 
+		        );
+	}
+	</script>
 </head> 
 <body> 
+<img src="/static/img/logo.png" class="logo">
+	<div id='output'>floep</div>
 	<div class='menu'>
-		{% if user.username %} 
-	      <span class='menuitem'>logged in as {{ user.username }}!</span>
+		{% if username %} 
+	      <span class='menuitem'>logged in as {{ username }}! <a href="/logout/">logout</a></span>
 	    {% else %} 
-			<a class='menuitem' href="/login/">login</a> 
+			<a class='menuitem' href="/accounts/login/">login</a> <a class='menuitem' href='/register/'>register</a>
 	    {% endif %}
 
-			<a class='menuitem' href='/tips/'>tips</a>
+			<a class='menuitem' href='/tip/'>tips</a>
+			<a class='menuitem' href='/createtip/'>add</a>
+			<a class='menuitem' href='/mytips/'>my tips</a>
+			<a class='menuitem' href='/user/'>users</a>
 
-			<a class='menuitem' href='/wishes/'>wishes</a>
+			<a class='menuitem' href='/wish/'>wishes</a>
+			<a href="#" onclick="flapsor();">hide divs</a>
 	</div>
   	<div class='page_title'><h1>
   		{% block page_title %}{% endblock %}</h1> 
 	</div>
-	<div class='content'>
+	<div id='content'>
   		{% block content %}{% endblock %} 
 	</div>
 </body> 
