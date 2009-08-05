@@ -10,11 +10,11 @@
 	}
 
 
-	img.logo  { 
+/*	img.logo  { 
 		position:absolute; 
 		bottom:0;    
 		right:0; 
-	}
+	}*/
 
 
 	</style>
@@ -48,19 +48,20 @@
 	</script>
 </head> 
 <body> 
-<img src="/static/img/logo.png" class="logo">
+<!-- <img src="/static/img/logo.png" class="logo"/> -->
 	<div id='output'>floep</div>
 	<div class='menu'>
 		{% if username %} 
 	      <span class='menuitem'>logged in as {{ username }}! <a href="/logout/">logout</a></span>
 	    {% else %} 
-			<a class='menuitem' href="/accounts/login/">login</a> <a class='menuitem' href='/register/'>register</a>
+			<a class='menuitem' href="/login/">login</a> <a class='menuitem' href='/register/'>register</a>
 	    {% endif %}
 
 			<a class='menuitem' href='/tip/'>tips</a>
 			<a class='menuitem' href='/createtip/'>add</a>
 			<a class='menuitem' href='/mytips/'>my tips</a>
 			<a class='menuitem' href='/user/'>users</a>
+			<a class='menuitem' href='/tags/'>tags</a>
 
 			<a class='menuitem' href='/wish/'>wishes</a>
 			<a href="#" onclick="flapsor();">hide divs</a>

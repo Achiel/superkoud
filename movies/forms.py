@@ -27,6 +27,13 @@ class MovietipSaveForm(forms.Form):
 	)
 	
 class MoviewishSaveForm(forms.Form):
+	movie = forms.CharField( 
+		label='Moviewish', 
+		widget=forms.TextInput(attrs={'size': 64}),
+		required=True
+	)
+	
+class MoviewishConvertForm(forms.Form):
 	movie = forms.CharField(
 		widget=forms.HiddenInput
 	)

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+	{% block title %}
+	{% endblock %}
+	{% block page_title %}
+	{% endblock %}
+	
+	{% block content %}
+		{% for tag in tags %} 
+			<div class='tagcloud_tag'>
+				<a href='/tags/{{ tag.name}}'>{{ tag.name }}</a>
+			</div>
+		{% endfor %}
+	{% endblock %}

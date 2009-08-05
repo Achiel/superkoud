@@ -12,6 +12,7 @@ from movietip_views import *
 from tag_views import *
 from moviewish_views import *
 from movie_views import *
+from tag_views import *
 
 from movies.models import * 
 from movies.forms import *
@@ -103,9 +104,9 @@ def render_error(error):
 
 @login_required
 def moviewishes_page(request):
-	moviewishes = Moviewish.objects.all()
+	moviewishes = Moviewish.objects.filter(user=request.user.id)
 	for wish in moviewishes:
-		wish.form = MoviewishSaveForm({'movie' : wish.movie})
+		wish.form = MoviewishConvertForm({'movie' : wish.movie})
 	return HttpResponse(get_template('moviewishes_page.html').render(Context({
 			'username' : get_username(request),
 			'moviewishes' : moviewishes
@@ -135,11 +136,28 @@ def moviewish_view_page(request, moviewish_id):
 		# delete_moviewish(moviewish_id)
 		return HttpResponseRedirect('/wish/')
 		
-	
 @login_required
 def moviewish_save_page(request):
 	if request.method == 'POST':
 		form = MoviewishSaveForm(request.POST)
+		if form.is_valid():
+			movie, createdmovie = Movie.objects.get_or_create( 
+				title = form.cleaned_data['movie']
+			)
+			moviewish, createdwish = Moviewish.objects.get_or_create(
+				user = request.user,
+				movie = movie
+			)
+			moviewish.save()
+			return HttpResponseRedirect('/wish/%s' % moviewish.id)
+		else:
+			return render_error('Moviewish save page form not valid')
+	else:
+		return render_error('Moviewish save page does not support \'GET\'')
+@login_required
+def moviewish_convert_page(request):
+	if request.method == 'POST':
+		form = MoviewishConvertForm(request.POST)
 		if form.is_valid():
 			movie, createdmovie = Movie.objects.get_or_create( 
 				title = form.cleaned_data['movie']
@@ -159,11 +177,11 @@ def moviewish_save_page(request):
 @login_required
 def movietip_convert_page(request, moviewish_id):
 	if request.method == 'POST':
-		try:
-			moviewish = Moviewish.objects.get(id=moviewish_id, user=request.user)
-		except:
-			raise Http404('Wish not found')
-		convert_form = MoviewishSaveForm(request)
+		# try:
+		# 			moviewish = Moviewish.objects.get(id=moviewish_id, user=request.user)
+		# 		except:
+		# 			raise Http404('Wish not found')
+		convert_form = MoviewishConvertForm(request)
 		if convert_form.is_valid():
 			title = form.cleaned_data['movie']
 			movietip, created = Movietip.objects.get_or_create(

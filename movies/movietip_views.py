@@ -45,9 +45,11 @@ def movietip_view_page(request, movietipid):
 @login_required
 def movietip_save_page(request):
 	if request.method == 'GET': 
-		form = MovietipSaveForm() 
+		movietipform = MovietipSaveForm() 
+		moviewishform = MoviewishSaveForm()
 		variables = RequestContext(request, { 
-			'form': form, 
+			'movietipform': movietipform, 
+			'moviewishform' : moviewishform, 
 			'username' : get_username(request)
 		}) 
 		return render_to_response('movietip_save.html', variables)
@@ -66,7 +68,7 @@ def movietip_save_page(request):
 				tag, dummy = Tag.objects.get_or_create(name=tag_name) 
 				tag.movietip = movietip
 				tag.save()
-				movietip.tag_set.add(tag)
+				# movietip.tag_set.add(tag)
 			movietip.description = form.cleaned_data['description'] 
 			movietip.save() 
 			return HttpResponseRedirect('/user/%s' % get_username(request) ) 
