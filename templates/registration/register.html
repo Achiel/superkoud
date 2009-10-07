@@ -4,8 +4,12 @@
 
 {% block content %}
   <h1>Create an account</h1>
+  {% if message %}
+	{{ message }}
+  {% endif %}
   <form action="" method="post">
-      {{ form.as_p }}
+      <p><label for="id_username">Username:</label> <input id="id_username" type="text" name="username" maxlength="30" /> </p> 
+<p><label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" /></p> 
       <input type="submit" value="Create the account">
   </form>
 {% endblock %}

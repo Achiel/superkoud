@@ -1,7 +1,8 @@
 from django.http import HttpResponse, Http404
 from django.template import Context 
 from django.template.loader import get_template 
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import UserCreationForm
+from forms import SKUserCreationForm
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
@@ -47,6 +48,7 @@ def user_page(request, username):
   variables = Context({ 
     'username': username, 
     'movietips': movietips,
+    'addfriendforum' : AddFriendForm()
   }) 
   output = template.render(variables) 
   return HttpResponse(output)
@@ -76,7 +78,7 @@ def users_page(request):
 
 def register(request):
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
+		form = SKUserCreationForm(request.POST)
 		if form.is_valid():
 			new_user = form.save()
 			request.session['username'] = new_user.username
@@ -87,7 +89,7 @@ def register(request):
 					'message' : "form isn't valid",
 				})
 	else:
-		form = UserCreationForm()
+		form = SKUserCreationForm()
 		return render_to_response("registration/register.html", {
 			'form': form,
 			})
