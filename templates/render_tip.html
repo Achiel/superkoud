@@ -11,11 +11,14 @@
 			<a href='/tag/{{ tag.name }}'> {{ tag.name}} </a>
 		{% endfor %}
 	</div>
+	<!-- movietip.user.username == username -->
+	{% if wishform %}
 	<div class='towish'>
 		<form action="/converttowish/" method="post">
 	      {{ wishform.as_p }}
 	      <input type="submit" value="Add to my wishlist">
 	  </form>	
 	</div>	
+	{% endif %}
 </div>
 		

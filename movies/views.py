@@ -154,6 +154,7 @@ def moviewish_save_page(request):
 			return render_error('Moviewish save page form not valid')
 	else:
 		return render_error('Moviewish save page does not support \'GET\'')
+		
 @login_required
 def moviewish_convert_page(request):
 	if request.method == 'POST':
@@ -172,7 +173,18 @@ def moviewish_convert_page(request):
 			return render_error('Moviewish save page form not valid')
 	else:
 		return render_error('Moviewish save page does not support \'GET\'')
-		
+
+# converts a wish to a tip
+@login_required
+def movietip_convert_page(request):
+	convert_form = MoviewishConvertForum(request)
+	if convert_form.is_valid():
+		title = form.cleaned_data['movie']
+		movietip, created = Movietip.objects.get_or_create(
+			movie = form.cleaned_data['movie']
+		)
+	print title
+				
 # converts a wish to a tip
 @login_required
 def movietip_convert_page(request, moviewish_id):
