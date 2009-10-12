@@ -76,4 +76,4 @@ class SKUserCreationForm(forms.ModelForm):
         return user
 
 class AddFriendForm(forms.Form):
-	
+	pass

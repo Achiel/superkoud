@@ -26,7 +26,7 @@ urlpatterns = patterns('',
 	(r'^user/(\w+)$', user_page), 
 	(r'^user/$', users_page),
 	
-	(r'^login/$', 'django.contrib.auth.views.login', ), 
+	(r'^login/$', 'django.contrib.auth.views.login'), 
 	(r'^accounts/login/$', 'django.contrib.auth.views.login'), 
 	(r'^logout/$', 'django.contrib.auth.views.logout'),
 	(r'^register/$', register),
