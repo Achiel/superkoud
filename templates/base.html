@@ -17,7 +17,17 @@
 		right: 10px; 
 		width: 535px; 
 		height: 715px; 
-		
+		z-index: 3;
+	}
+
+	#content {
+		z-index: 4;
+		position: relative;
+	}
+
+	.menu {
+		position: relative;
+		z-index: 4;
 	}
 
 
@@ -26,8 +36,6 @@
 	<script src="/static/js/jquery.js" type="text/javascript"></script>
 </head> 
 <body> 
-	<div id="background_logo"></div>
-<!-- <img src="/static/img/logo.png" class="logo"/> -->
 	<div class='menu'>
 		{% if username %} 
 	      <span class='menuitem'>logged in as {{ username }}! <a href="/logout/">logout</a></span>
@@ -49,4 +57,5 @@
 	<div id='content'>
   		{% block content %}{% endblock %} 
 	</div>
+<div id="background_logo"></div>
 </body> 
