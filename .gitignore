@@ -2,4 +2,4 @@
 *.pyc
 local_settings.py
 *.swp
-*/*.pyc
+**/*.pyc
