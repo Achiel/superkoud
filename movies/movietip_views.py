@@ -11,6 +11,7 @@ from movies.forms import *
 from django.http import HttpResponseRedirect
 from django.forms import ModelForm
 
+@login_required
 def delete_movietip(movietip_id):
 	try: 
 		movietip = Movietip.objects.get(id=movietip_id) 
@@ -76,7 +77,11 @@ def movietip_save_page(request):
 			render_error('Movie save page form not valid')
 
 def movietips_page(request):
-	movietips = Movietip.objects.all()[:10]
+	print get_username(request)
+	if get_username(request) is not None:
+		movietips = Movietip.objects.exclude(user=request.user.id)
+	else:
+		movietips = Movietip.objects.all()[:10]
 	template = get_template('movietips_page.html')
 	variables = Context({
 		'username' : get_username(request),
