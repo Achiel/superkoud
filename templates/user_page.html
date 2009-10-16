@@ -8,9 +8,9 @@
 	{% block content %}
 		{% include 'render_tips.html' %}
 
-	<form action="" method="post">
+	<form action="/follow/" method="post">
         <table>
-            {{ addfriendform.as_form }}
+            {{ followform.as_p }}
         </table>
         <input type="submit" value="add {{ username }} as a friend">
     </form>

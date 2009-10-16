@@ -45,10 +45,11 @@ def user_page(request, username):
     raise Http404('Requested user not found.') 
   movietips = user.movietip_set.all() 
   template = get_template('user_page.html') 
+  followform = FollowForm(initial={'username':username})
   variables = Context({ 
     'username': username, 
     'movietips': movietips,
-    'addfriendforum' : AddFriendForm()
+    'followform' : followform 
   }) 
   output = template.render(variables) 
   return HttpResponse(output)
@@ -179,22 +180,19 @@ def moviewish_convert_page(request):
 # converts a wish to a tip
 @login_required
 def movietip_convert_page(request):
-	convert_form = MoviewishConvertForum(request)
+	convert_form = MoviewishConvertForm(request.POST)
 	if convert_form.is_valid():
 		title = form.cleaned_data['movie']
 		movietip, created = Movietip.objects.get_or_create(
-			movie = form.cleaned_data['movie']
+			movie = convert_form.cleaned_data['movie']
 		)
-	print title
+		print title
+	return HttpResponseRedirect('/wish/')
 				
 # converts a wish to a tip
 @login_required
-def movietip_convert_page(request, moviewish_id):
+def movietip_convert_page2(request, moviewish_id):
 	if request.method == 'POST':
-		# try:
-		# 			moviewish = Moviewish.objects.get(id=moviewish_id, user=request.user)
-		# 		except:
-		# 			raise Http404('Wish not found')
 		convert_form = MoviewishConvertForm(request)
 		if convert_form.is_valid():
 			title = form.cleaned_data['movie']
@@ -203,3 +201,28 @@ def movietip_convert_page(request, moviewish_id):
 			)
 			movietip.save()
 	return HttpResponseRedirect('/tip/')
+
+@login_required
+def follow_user(request):
+	if request.method is 'POST':
+		form = FollowForm(request)
+		if form.is_valid():
+			username = form.cleaned_data['username']
+			print username
+			user = User.objects.get(name=username)
+			myprofile = UserProfile.objects.get(user=request.user.id)
+			myprofile.following.append(user)
+			myprofile.save()	
+	return HttpResponseRedirect('/')
+
+@login_required
+def view_following(request):
+	following = request.user.get_profile()
+	template = get_template('following_page.html')
+	variables = Context({
+		'username': username,
+		'following': following
+	})
+
+	output = template.render(variables)	
+	return HttpResponse(output)

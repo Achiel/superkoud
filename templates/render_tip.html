@@ -15,7 +15,7 @@
 	{% if wishform %}
 	<div class='towish'>
 		<form action="/converttowish/" method="post">
-	      {{ wishform.as_p }}
+		<p><input id="id_movie" type="hidden" name="movie" value="{{ movietip.movie.title }}" size="64" /></p> 
 	      <input type="submit" value="Add to my wishlist">
 	  </form>	
 	</div>	

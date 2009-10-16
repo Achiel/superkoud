@@ -3,4 +3,3 @@
 local_settings.py
 *.swp
 **/*.pyc
-*.py~

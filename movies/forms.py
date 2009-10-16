@@ -75,5 +75,8 @@ class SKUserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-class AddFriendForm(forms.Form):
-	pass
+class FollowForm(forms.Form):
+	username = forms.CharField(
+		widget=forms.HiddenInput,
+		required=True
+	)

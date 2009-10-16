@@ -31,6 +31,9 @@ urlpatterns = patterns('',
 	(r'^logout/$', 'django.contrib.auth.views.logout'),
 	(r'^register/$', register),
 
+	(r'^follow/$', follow_user),
+	(r'^following/$', view_following),
+
 	(r'^movie/(\w+)$', movie_view_page),
 	(r'^tags/$', view_all_tags),
 	
@@ -44,7 +47,7 @@ urlpatterns = patterns('',
 	
 	(r'^mytips/$', movietips_my_page),
 	(r'^converttotip/$', movietip_convert_page),
-	(r'^converttotip/(\w+)$', movietip_convert_page),
+	#(r'^converttotip/(\w+)$', movietip_convert_page),
 
 	
 	(r'^tag/(\w+)$', view_tag_page),

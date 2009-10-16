@@ -26,11 +26,35 @@
 	
 	text-decoration: none;
 	color: #BBB;
-	font-size: 200%;
+	font-size: 150%;
 	font-family: Arial, "MS Trebuchet", sans-serif;
-	height: 40px;
 }
 
 .menuitem:hover {
 	color: black;
+}
+
+body {
+       background:#FFFFFF url('/static/img/bar.png') repeat-x fixed center bottom;
+}
+
+
+#background_logo  {
+       background:#000000 url('/static/img/logo.png') no-repeat;
+       position: absolute;
+       bottom: 0;
+       right: 10px;
+       width: 535px;
+       height: 715px;
+       z-index: 3;
+}
+
+#content {
+       z-index: 4;
+       position: relative;
+}
+
+.menu {
+       position: relative;
+       z-index: 4;
 }

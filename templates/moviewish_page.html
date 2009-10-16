@@ -9,7 +9,7 @@
 	</div>
 	<div class='totip'>
 		<form action="/converttotip/" method="post">
-	      {{ tipform.as_p }}
+		<p><input id="id_movie" type="hidden" name="movie" value="{{ moviewish.movie.title }}" size="64" /></p>
 	      <input type="submit" value="seen it, like it!">
 	  </form>	
 	</div>	
