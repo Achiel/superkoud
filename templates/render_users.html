@@ -1,0 +1,14 @@
+<div class='userlist'>
+                        {% if users %}
+                      <ul>
+                        {% for u in users %}
+                                <li><a href="/user/{{ u.username }}"> 
+                                {{ u.username }}</a>
+                                        </li>
+                        {% endfor %}
+                      </ul>
+                        </div>
+                    {% else %}
+                      <p>No users found matching your criteria.</p>
+                    {% endif %}
+                </div>
