@@ -38,7 +38,12 @@ class Moviewish(models.Model):
 	    return self.movie.title
 
 # Signals:
-def create_profile(sender, **kwargs):
+def create_profile(sender, instance, signal, *args, **kwargs):
+	if 'created' in kwargs:
+		profile, created = UserProfile.objects.get_or_create(
+			user = instance
+		)
+		profile.save()
 	print "should create profile"
 
-post_save.connect(create_profile, sender=User, created=True)
+post_save.connect(create_profile, sender=User)

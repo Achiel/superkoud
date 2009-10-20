@@ -217,10 +217,11 @@ def follow_user(request):
 
 @login_required
 def view_following(request):
-	following = request.user.get_profile()
+	following = request.user.get_profile().following.all()
+	print following
 	template = get_template('following_page.html')
 	variables = Context({
-		'username': username,
+		'username': get_username(request),
 		'following': following
 	})
 

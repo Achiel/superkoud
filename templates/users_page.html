@@ -4,20 +4,6 @@
 	{% endblock %}
 	
 	{% block content %}
-		<div class='userlist'>
-			{% if users %} 
-		      <ul> 
-		        {% for u in users %} 
-		          	<li><a href="/user/{{ u.username }}"> 
-		            	{{ u.username }}</a>
-					</li> 
-		        {% endfor %} 
-		      </ul> 
-			</div>
-		    {% else %} 
-		      <p>No movietips found.</p> 
-		    {% endif %}
-		</div>
-			
+		{% include 'render_users.html' %}	
 	{% endblock %}
 
