@@ -11,8 +11,6 @@ def view_tip(request, tip):
 	wishform = MoviewishSaveForm({'movie' : movietip.movie})
 	username = get_username(request)
 	tags = Tag.objects.filter(movietips=movietip)
-	print tags
-	print "blub"
 	variables = Context({ 	
 		'username': username, 
 		'movietip': movietip,

@@ -31,8 +31,6 @@ def movietip_view_page(request, movietipid):
 	wishform = MoviewishSaveForm({'movie' : movietip.movie})
 	username = get_username(request)
 	tags = Tag.objects.filter(movietips=movietip)
-	print tags
-	print "blub"
 	variables = Context({ 	
 		'username': username, 
 		'movietip': movietip,
@@ -77,7 +75,6 @@ def movietip_save_page(request):
 			render_error('Movie save page form not valid')
 
 def movietips_page(request):
-	print get_username(request)
 	if get_username(request) is not None:
 		movietips = Movietip.objects.exclude(user=request.user.id)
 	else:

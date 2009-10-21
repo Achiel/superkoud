@@ -44,6 +44,5 @@ def create_profile(sender, instance, signal, *args, **kwargs):
 			user = instance
 		)
 		profile.save()
-	print "should create profile"
 
 post_save.connect(create_profile, sender=User)
