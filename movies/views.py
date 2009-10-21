@@ -45,7 +45,7 @@ def user_page(request, username):
     raise Http404('Requested user not found.') 
   movietips = user.movietip_set.all() 
   template = get_template('user_page.html') 
-  followform = FollowForm(initial={'username':username})
+  followform = FollowForm(initial={'followusername':username})
   variables = Context({ 
     'username': username, 
     'movietips': movietips,
@@ -193,7 +193,7 @@ def movietip_convert_page(request):
 @login_required
 def movietip_convert_page2(request, moviewish_id):
 	if request.method == 'POST':
-		convert_form = MoviewishConvertForm(request)
+		convert_form = MoviewishConvertForm(request.POST)
 		if convert_form.is_valid():
 			title = form.cleaned_data['movie']
 			movietip, created = Movietip.objects.get_or_create(
@@ -204,25 +204,27 @@ def movietip_convert_page2(request, moviewish_id):
 
 @login_required
 def follow_user(request):
-	if request.method is 'POST':
-		form = FollowForm(request)
+	if request.method == 'POST':
+		form = FollowForm(request.POST)
 		if form.is_valid():
-			username = form.cleaned_data['username']
-			print username
-			user = User.objects.get(name=username)
+			username = form.cleaned_data['followusername']
+			user = User.objects.get(username=username)
 			myprofile = UserProfile.objects.get(user=request.user.id)
-			myprofile.following.append(user)
+			myprofile.following.add(user)
 			myprofile.save()	
+		else:
+			return render_error("Form not valid")
 	return HttpResponseRedirect('/')
 
 @login_required
 def view_following(request):
 	following = request.user.get_profile().following.all()
 	print following
+	print "foep"
 	template = get_template('following_page.html')
 	variables = Context({
 		'username': get_username(request),
-		'following': following
+		'users': following
 	})
 
 	output = template.render(variables)	
