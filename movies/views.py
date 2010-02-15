@@ -18,6 +18,7 @@ from tag_views import *
 from movies.models import * 
 from movies.forms import *
 from django.contrib.auth.models import User 
+from utils.shpaml_loader import load_template_source
 
 def delete_moviewish(moviewish_id):
 	try: 
@@ -27,12 +28,14 @@ def delete_moviewish(moviewish_id):
 	moviewish.delete()
 
 def main_page(request): 
-  template = get_template('main_page.html') 
+  template = load_template_source('main.html')
   variables = Context({ 
     'head_title': 'Superkoud ', 
     'page_title': 'brrrr', 
     'page_body': 'Helping movie addicts, one tip at a time',
     'username': get_username(request),
+    'tipform' : MovietipSaveForm(), 
+    'movietips' : Movietip.objects.all()[:10],
   }) 
   output = template.render(variables) 
   return HttpResponse(output)
