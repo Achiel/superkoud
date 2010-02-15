@@ -41,7 +41,7 @@ urlpatterns = patterns('',
 	url(r'^tip/(\w+)\.xml$', movie_xml_resource),
 
 	(r'^tip/$', movietips_page),
-	(r'^createtip/$', movietip_save_page),
+	(r'^savetip/$', movietip_save_page),
 	(r'^tip/(\w+)/$', movietip_view_page),
 	(r'^tip/view/(\w+)$', movietip_view_page),
 	
