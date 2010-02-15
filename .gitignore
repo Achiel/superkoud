@@ -4,4 +4,4 @@ local_settings.py
 *.swp
 **/*.pyc
 superkoud.tmproj
-db
+db/*
