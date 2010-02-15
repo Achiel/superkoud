@@ -1,0 +1,33 @@
+#content {
+ position:relative;
+ top:30%;
+ left:25%;
+ width: 600px;
+ z-index: 4;
+}
+
+body {
+       background:#FFFFFF url('/static/img/bar.png') repeat-x fixed center bottom;
+}
+
+#background_logo  {
+       background:#000000 url('/static/img/logo.png') no-repeat;
+       position: absolute;
+       bottom: 0;
+       right: 10px;
+       width: 535px;
+       height: 715px;
+       z-index: 3;
+}
+
+#tipform {
+ position:absolute;
+ top:0;
+ right:0;
+ width:400;
+}
+#tips {
+ position:absolute;
+ top:0;
+ left:0;
+}
