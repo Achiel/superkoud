@@ -1,16 +1,49 @@
 html
 	head
 		> link rel="stylesheet" type="text/css" href="static/css/main.css"
+		> link type="text/javascript" src="/static/js/jquery.js"
+		script type="text/javascript"
+			alert("argh");
 		title
 			welcome to superkoud
 	body
 		div#content
 			div#tipform
-				form action='savetip' method='POST'
-					{{ tipform.as_p }}
+				form action=savetip/ method=POST
+					label for=id_movie
+						movie
+					> input id=id_movie type=text name=movie size=50
+					> br
+					label for=id_description
+						what'd you think?
+
+					textarea id=id_description rows=4 cs=50 name=description | in 200 chars or less..
+						
+					<br/>
+
 					> input type=submit value=add
 
 			div#tips
 				{% include 'render_tips.html' %}
-		> 	div.footer
+		div#tipbuttons
+			{% if user.is_authenticated %}
+				a href=# id="showfriends"
+					friends
+				a href=# id="showmine"
+					mine
+				a href=# id="showall"
+					all
+			{% endif %}
+		div#footer
+			{% if user.is_authenticated %}
+				{{ user }}
+				a href="{% url django.contrib.auth.views.logout %}" 
+					logout
+
+			{% else %}
+				a href="{% url django.contrib.auth.views.login %}" 
+					login				
+			{% endif %}
+
+
 		> div#background_logo

@@ -71,6 +71,10 @@ TEMPLATE_DIRS = (
 	os.path.join(os.path.dirname(__file__), 'templates'),
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+	'django.core.context_processors.auth',
+)
+
 SHPAML_TEMPLATE_DIRS = (
 	os.path.join(os.path.dirname(__file__), 'templates'),
 )
@@ -85,5 +89,9 @@ INSTALLED_APPS = (
 )
 
 AUTH_PROFILE_MODULE = "movies.UserProfile"
+LOGIN_URL = '/login/'
 
-from local_settings import *
+try:
+	from local_settings import *
+except:
+	pass

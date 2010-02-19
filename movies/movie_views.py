@@ -1,7 +1,5 @@
 from models import Movie
-from general import *
 from django.template.loader import get_template 
-from django.template import Context 
 from django.http import HttpResponse, Http404
 
 def movie_view_page(request, movie_id):
@@ -13,10 +11,8 @@ def movie_view_page(request, movie_id):
 		template = get_template('render_movie.html')
 	else:
 		template = get_template('movie_page.html') 
-	username = get_username(request)
 
-	variables = Context({ 	
-		'username': username, 
+	variables = RequestContext(request, { 	
 		'movie' : movie,
 	}) 
 

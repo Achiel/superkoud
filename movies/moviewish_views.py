@@ -9,13 +9,9 @@ def view_tip(request, tip):
 	else:
 		template = get_template('movietip_page.html') 
 	wishform = MoviewishSaveForm({'movie' : movietip.movie})
-	username = get_username(request)
-	tags = Tag.objects.filter(movietips=movietip)
-	variables = Context({ 	
-		'username': username, 
+	variables = RequestContext(request, { 	
 		'movietip': movietip,
 		'wishform': wishform,
-		'tiptags' : tags,
 	}) 
 
 	output = template.render(variables) 

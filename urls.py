@@ -27,7 +27,6 @@ urlpatterns = patterns('',
 	(r'^user/$', users_page),
 	
 	(r'^login/$', 'django.contrib.auth.views.login'), 
-	(r'^accounts/login/$', 'django.contrib.auth.views.login'), 
 	(r'^logout/$', 'django.contrib.auth.views.logout'),
 	(r'^register/$', register),
 
@@ -35,7 +34,6 @@ urlpatterns = patterns('',
 	(r'^following/$', view_following),
 
 	(r'^movie/(\w+)$', movie_view_page),
-	(r'^tags/$', view_all_tags),
 	
 	url(r'^tip/(\w+)\.json$', movie_json_resource),
 	url(r'^tip/(\w+)\.xml$', movie_xml_resource),
@@ -50,7 +48,6 @@ urlpatterns = patterns('',
 	#(r'^converttotip/(\w+)$', movietip_convert_page),
 
 	
-	(r'^tag/(\w+)$', view_tag_page),
 	(r'^wish/$', moviewishes_page),
 	(r'^wish/save/(\w+)$', moviewish_convert_page),
 	(r'^wish/(\w+)$', moviewish_view_page),

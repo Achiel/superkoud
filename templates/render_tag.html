@@ -1,9 +1,0 @@
-<div class='tag'>
-Movies that were tagged with <i> {{ tag.name }}</i>:<br/>
-<div class='tagged_movies'>
-
- {% for movietip in movietips.all %} 
-	<a href='/movie/{{ movietip.movie.id }}'> {{ movietip.movie.title }}</a>
- {% endfor %}
-</div>
-</div>

@@ -1,5 +1,4 @@
 from django.http import HttpResponse, Http404
-from django.template import Context 
 from django.template.loader import get_template 
 #from django.contrib.auth.forms import UserCreationForm
 from forms import SKUserCreationForm
@@ -8,12 +7,9 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
-from general import *
 from movietip_views import *
-from tag_views import *
 from moviewish_views import *
 from movie_views import *
-from tag_views import *
 
 from movies.models import * 
 from movies.forms import *
@@ -29,11 +25,10 @@ def delete_moviewish(moviewish_id):
 
 def main_page(request): 
   template = load_template_source('main.html')
-  variables = Context({ 
+  variables = RequestContext(request, { 
     'head_title': 'Superkoud ', 
     'page_title': 'brrrr', 
     'page_body': 'Helping movie addicts, one tip at a time',
-    'username': get_username(request),
     'tipform' : MovietipSaveForm(), 
     'movietips' : Movietip.objects.all()[:10],
   }) 
@@ -49,7 +44,7 @@ def user_page(request, username):
   movietips = user.movietip_set.all() 
   template = get_template('user_page.html') 
   followform = FollowForm(initial={'followusername':username})
-  variables = Context({ 
+  variables = RequestContext(request, { 
     'username': username, 
     'movietips': movietips,
     'followform' : followform 
@@ -74,8 +69,7 @@ def edit_profile(req):
 def users_page(request):
 	users = User.objects.all()
 	template = get_template('users_page.html')
-	variables = Context({
-		'username' : get_username(request),
+	variables = RequestContext(request, {
 		'users' : users
 	})
 	return HttpResponse(template.render(variables))
@@ -100,7 +94,7 @@ def register(request):
 
 def render_error(error):
 	template = get_template('error_page.html')
-	variables = Context({ 
+	variables = RequestContext(request, { 
 	    'head_title': 'Superkoud ', 
 	    'page_title': 'Error', 
 	    'page_body': error,
@@ -113,8 +107,7 @@ def moviewishes_page(request):
 	moviewishes = Moviewish.objects.filter(user=request.user.id)
 	for wish in moviewishes:
 		wish.form = MoviewishConvertForm({'movie' : wish.movie})
-	return HttpResponse(get_template('moviewishes_page.html').render(Context({
-			'username' : get_username(request),
+	return HttpResponse(get_template('moviewishes_page.html').render(RequestContext(request, {
 			'moviewishes' : moviewishes
 		})))
 
@@ -125,9 +118,8 @@ def moviewish_view_page(request, moviewish_id):
 		except: 
 			raise Http404('Requested wish not found.') 
 		template = get_template('moviewish_page.html') 
-		username = get_username(request)
 		tipform = MoviewishSaveForm({'movie' : moviewish.movie})
-		variables = Context({ 	
+		variables = RequestContext(request, { 	
 			'username': username, 
 			'moviewish': moviewish,
 			'movie' : moviewish.movie,
@@ -225,8 +217,7 @@ def view_following(request):
 	print following
 	print "foep"
 	template = get_template('following_page.html')
-	variables = Context({
-		'username': get_username(request),
+	variables = RequestContext(request, {
 		'users': following
 	})
 

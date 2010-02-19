@@ -25,12 +25,6 @@ class Movietip(models.Model):
 	def __str__(self): 
 	    return self.movie.title + " " + self.description
 	
-class Tag(models.Model): 
-	name = models.CharField(max_length=64, unique=True) 
-	movietips = models.ManyToManyField(Movietip)
-	def __str__(self): 
-	    return self.name
-
 class Moviewish(models.Model):
 	user = models.ForeignKey(User)
 	movie = models.ForeignKey(Movie)
