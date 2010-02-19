@@ -1,23 +1,11 @@
 from django.conf.urls.defaults import * 
 from movies.views import * 
 from movies.movietip_views import *
-from django_restapi.model_resource import Collection
-from django_restapi.responder import JSONResponder
-from django_restapi.responder import XMLResponder
 import os.path
 static_media = os.path.join( 
   os.path.dirname(__file__), 'static_media' 
 )
 
-movie_json_resource = Collection(
-    queryset = Movietip.objects.all(),
-    responder = JSONResponder()
-)
-
-movie_xml_resource = Collection(
-	queryset = Movietip.objects.all(),
-	responder = XMLResponder()
-)
 
 urlpatterns = patterns('', 
 	(r'^$', main_page), 
@@ -35,9 +23,6 @@ urlpatterns = patterns('',
 
 	(r'^movie/(\w+)$', movie_view_page),
 	
-	url(r'^tip/(\w+)\.json$', movie_json_resource),
-	url(r'^tip/(\w+)\.xml$', movie_xml_resource),
-
 	(r'^tip/$', movietips_page),
 	(r'^savetip/$', movietip_save_page),
 	(r'^tip/(\w+)/$', movietip_view_page),
@@ -57,7 +42,4 @@ urlpatterns = patterns('',
 	(r'^static/(?P<path>.*)$', 'django.views.static.serve', 
 	    { 'document_root': static_media }),
 	
-	#url(r'^movies/(.*?)/\?format=json$', mymodel_resource),
-	url(r'^movies/(\w+)\.json$', movie_json_resource),
-	url(r'^movies/(\w+)\.xml$', movie_xml_resource),
 )
